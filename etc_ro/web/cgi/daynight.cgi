@@ -1,0 +1,16 @@
+DayNightMode=%%DayNightMode();%%
+LightSensorControl=%%LightSensorControl();%%
+IRLedScheduleSunStart=%%IRLedScheduleSunStart();%%
+IRLedScheduleSunEnd=%%IRLedScheduleSunEnd();%%
+IRLedScheduleMonStart=%%IRLedScheduleMonStart();%%
+IRLedScheduleMonEnd=%%IRLedScheduleMonEnd();%%
+IRLedScheduleTueStart=%%IRLedScheduleTueStart();%%
+IRLedScheduleTueEnd=%%IRLedScheduleTueEnd();%%
+IRLedScheduleWedStart=%%IRLedScheduleWedStart();%%
+IRLedScheduleWedEnd=%%IRLedScheduleWedEnd();%%
+IRLedScheduleThuStart=%%IRLedScheduleThuStart();%%
+IRLedScheduleThuEnd=%%IRLedScheduleThuEnd();%%
+IRLedScheduleFriStart=%%IRLedScheduleFriStart();%%
+IRLedScheduleFriEnd=%%IRLedScheduleFriEnd();%%
+IRLedScheduleSatStart=%%IRLedScheduleSatStart();%%
+IRLedScheduleSatEnd=%%IRLedScheduleSatEnd();%%

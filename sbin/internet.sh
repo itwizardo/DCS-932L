@@ -33,25 +33,29 @@ echo "21 stream tcp nowait $login /usr/bin/ftpd ftpd -w" > /etc/inetd.conf
 gpio telnetd_ftpd
 #inetd &
 
-
 # audio
-pcmcmd -s &
+model=`gpio model`
+if [ "$model" == "DCS-5000L" ]; then
+pcmcmd -s -q 11025 &
+else
+pcmcmd -s -q 8000 -x 15 &
+fi
 
 # video
 uvc_stream -b &
 # sleep 2 sec. in order to uvc_stream can get correct configuration data after factory reset
 sleep 2
 
-# Set RT3050 to dump switch mode (restore to no VLAN partition)
-switch reg w 14 5555
-switch reg w 40 1001
-switch reg w 44 1001
-switch reg w 48 1001
-switch reg w 4c 1
-switch reg w 50 2001
-switch reg w 70 ffffffff
-switch reg w 98 7f7f
-switch reg w e4 7f
+# Set RT5350 to dump switch mode (restore to no VLAN partition)
+#switch reg w 14 5555
+#switch reg w 40 1001
+#switch reg w 44 1001
+#switch reg w 48 1001
+#switch reg w 4c 1
+#switch reg w 50 2001
+#switch reg w 70 ffffffff
+#switch reg w 98 7f7f
+#switch reg w e4 7f
 
 # lo interface up -- mydlink need it
 ifconfig lo up
@@ -86,6 +90,17 @@ lld2d $lan_if
 # ping (send arp)
 gpio ping &
 swing
+
+# Set RT5350 to dump switch mode (restore to no VLAN partition)
+switch reg w 14 5555
+switch reg w 40 1001
+switch reg w 44 1001
+switch reg w 48 1001
+switch reg w 4c 1
+switch reg w 50 2001
+switch reg w 70 ffffffff
+switch reg w 98 7f7f
+switch reg w e4 7f
 
 echo "************************"
 echo "*  END OF INTERNET.SH  *"

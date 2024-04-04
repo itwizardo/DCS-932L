@@ -79,11 +79,6 @@ case "$1" in
             fi
         fi
 
-        # web server alphapd
-        # killall -q alphapd
-        # alphapd &
-        web.sh
-
         # ddns
         ddns.sh
 
@@ -114,7 +109,7 @@ case "$1" in
         
         # mydlinkevent
         killall -q mydlinkevent
-        gpio mydlinkevent        
+        mydlinkevent &
 
         # mDNSResponder
         killall -q mDNSResponder
@@ -123,7 +118,13 @@ case "$1" in
         # mydlink
         #/mydlink/opt.local stop
         #/mydlink/opt.local start
+        echo "from udhcpc.sh"
         gpio mydlink
+        
+        # web server alphapd
+        # killall -q alphapd
+        # alphapd &
+        web.sh        
 
         ;;
 esac

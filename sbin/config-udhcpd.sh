@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: config-udhcpd.sh,v 1.6.4.4 2009-04-22 02:46:43 michael Exp $
+# $Id: //WIFI_SOC/release/SDK_4_1_0_0/source/user/rt2880_app/scripts/config-udhcpd.sh#1 $
 #
 # usage: see function usage()
 #
@@ -26,6 +26,8 @@ usage () {
   echo "  -r [sleep_time] : run dhcp server"
   echo "  -k              : kill the running dhcp server"
   echo "  -S [mac ipaddr] : statically assign IP to given MAC address"
+# echo "  -x static_netmask : Ra propritary cmd"
+# echo "  -y static_router  : Ra propritary cmd"
   exit
 }
 
@@ -63,6 +65,12 @@ config () {
 	return
       fi
       ;;
+    "-x")
+      sed -e '/static_netmask/d' $fname > $fbak
+      echo "static_netmask $2" >> $fbak ;;
+    "-y")
+      sed -e '/static_router/d' $fname > $fbak
+      echo "static_router $2" >> $fbak ;;
     *) return;;
   esac
   cat $fbak > $fname
@@ -91,7 +99,7 @@ link_down()
 		"6")	rep="e"	;;
 		"7")	rep="f"	;;
 		# The power is already down
-		*)		echo "Warning in PHY reset script";return;;
+		*)		echo "Port$1 is down. Skip.";return;;
 	esac
 	new=$pre$rep$post
 	# power down
@@ -118,7 +126,7 @@ link_up()
 		"e")	rep="6"	;;
 		"f")	rep="7"	;;
 		# The power is already up
-		*)		echo "Warning in PHY reset script";return;;
+		*)		echo "Port$1 is up. Skip.";return;;
 	esac
 	new=$pre$rep$post
 	# power up
@@ -136,27 +144,34 @@ reset_all_phys()
 	opmode=`nvram_get 2860 OperationMode`
 
 	#skip WAN port
-	if [ "$opmode" != "1" ]; then
+	if [ "$opmode" != "1" ]; then #no wan port
 		link_down 0
+		link_down 4
+	elif [ "$CONFIG_WAN_AT_P4" = "y" ]; then #wan port at port4
+		link_down 0
+	elif [ "$CONFIG_WAN_AT_P0" = "y" ]; then #wan port at port0
+		link_down 4
 	fi
 	link_down 1
 	link_down 2
 	link_down 3
-	link_down 4
 
 	#force Windows clients to renew IP and update DNS server
 	sleep $sleep_time
 
-	if [ "$opmode" != "1" ]; then
+	#skip WAN port
+	if [ "$opmode" != "1" ]; then #no wan port
 		link_up 0
+		link_up 4
+	elif  [ "$CONFIG_WAN_AT_P4" = "y" ]; then #wan port at port4
+		link_up 0
+	elif [ "$CONFIG_WAN_AT_P0" = "y" ]; then #wan port at port0
+		link_up 4
 	fi
 	link_up 1
 	link_up 2
 	link_up 3
-	link_up 4
 }
-
-
 
 # argv 1 is empty
 if [ "$1" = "" ]; then
@@ -165,10 +180,8 @@ fi
 
 # argv 2 is empty
 if [ "$2" = "" ]; then
-  if [ "$1" != "-r" ]; then
-    if [ "$1" != "-k" ]; then
+  if [ "$1" != "-r" -a "$1" != "-k" -a "$1" != "-S" ]; then
       usage
-	fi
   fi
 fi
 
@@ -192,6 +205,8 @@ case "$1" in
     fi
     rm -f $pidfile
     touch $leases
+	sed '/^lease_file /d' $fname > $fbak
+	cat $fbak > $fname
     echo "lease_file $leases" >> $fname
     udhcpd $fname
     reset_all_phys $2;;
@@ -202,6 +217,8 @@ case "$1" in
       killall udhcpd
     fi
     rm -f $pidfile ;;
+  "-x") config "$1" "$2";;
+  "-y") config "$1" "$2";;
   *) usage;;
 esac
 

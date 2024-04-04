@@ -51,6 +51,58 @@ gpio dns2 0.0.0.0
 gpio dns1 $pd
 gpio dns2 $sd
 
+# web server alphapd
+#killall -q alphapd
+#alphapd &
+web.sh
+
+# ddns
+ddns.sh
+
+# ntp
+ntp.sh
+
+# schedule for mail and ftp client
+killall -q schedule
+killall -q mail
+killall -q ftpputimage
+schedule &
+
+# udp configuration and tftp upload
+killall -q lanconfig
+killall -q tftpupload
+lanconfig &
+tftpupload &
+
+# mydlinkevent
+killall -q mydlinkevent
+mydlinkevent &
+
+# mDNSResponder
+killall -q mDNSResponder
+gpio mDNSResponder
+
+# upnp
+#upnp=`nvram_get 2860 UPnPEnable`
+#if [ "$upnp" = "1" ]; then
+route add -net 239.0.0.0 netmask 255.0.0.0 dev br0
+killall -q udev
+killall -q ucp
+udev &
+ucp &
+#else
+#route del -net 239.0.0.0 netmask 255.0.0.0 dev br0
+#killall -q udev
+#killall -q ucp
+#fi
+
+# mydlink
+#/mydlink/opt.local stop
+#/mydlink/opt.local start
+echo "from lan.sh"
+gpio mydlink
+
+
 # dhcp client mode
 if [ "$ipmode" = "4" ]; then
 gpio dhcpstate 1
@@ -78,55 +130,5 @@ killall -q pppoecd
 killall -q pppoecd
 gpio pppoe 0.0.0.0 0.0.0.0
 fi
-
-# web server alphapd
-#killall -q alphapd
-#alphapd &
-web.sh
-
-# ddns
-ddns.sh
-
-# ntp
-ntp.sh
-
-# schedule for mail and ftp client
-killall -q schedule
-killall -q mail
-killall -q ftpputimage
-schedule &
-
-# udp configuration and tftp upload
-killall -q lanconfig
-killall -q tftpupload
-lanconfig &
-tftpupload &
-
-# mydlinkevent
-killall -q mydlinkevent
-gpio mydlinkevent
-
-# mDNSResponder
-killall -q mDNSResponder
-gpio mDNSResponder
-
-# upnp
-#upnp=`nvram_get 2860 UPnPEnable`
-#if [ "$upnp" = "1" ]; then
-route add -net 239.0.0.0 netmask 255.0.0.0 dev br0
-killall -q udev
-killall -q ucp
-udev &
-ucp &
-#else
-#route del -net 239.0.0.0 netmask 255.0.0.0 dev br0
-#killall -q udev
-#killall -q ucp
-#fi
-
-# mydlink
-#/mydlink/opt.local stop
-#/mydlink/opt.local start
-gpio mydlink
 
 echo "*** end lan.sh ***"

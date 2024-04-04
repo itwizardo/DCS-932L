@@ -7,6 +7,11 @@
 
 echo "**** wlan.sh ***"
 
+lan_link=`gpio lanlink`
+if [ "$lan_link" = "1" ]; then
+exit 0
+fi
+
 ifconfig ra0 down
 
 wlan_disable=`nvram_get 2860 WirelessDisable`

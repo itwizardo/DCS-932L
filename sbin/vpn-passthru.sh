@@ -10,13 +10,13 @@ pptp_pt=`nvram_get 2860 pptpPassThru`
 
 # note: they must be removed in order
 if [ "$CONFIG_NF_CONNTRACK_SUPPORT" = "y" ]; then
-	rmmod nf_nat_pptp
-	rmmod nf_conntrack_pptp
-	rmmod nf_nat_proto_gre
-	rmmod nf_conntrack_proto_gre
+	rmmod nf_nat_pptp 1>/dev/null 2>&1
+	rmmod nf_conntrack_pptp 1>/dev/null 2>&1
+	rmmod nf_nat_proto_gre 1>/dev/null 2>&1
+	rmmod nf_conntrack_proto_gre 1>/dev/null 2>&1
 else
-	rmmod ip_nat_pptp
-	rmmod ip_conntrack_pptp
+	rmmod ip_nat_pptp 1>/dev/null 2>&1
+	rmmod ip_conntrack_pptp 1>/dev/null 2>&1
 fi
 
 if [ "$pptp_pt" = "1" -o "$l2tp_pt" = "1" -o "$ipsec_pt" = "1" ]; then
