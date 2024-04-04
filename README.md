@@ -48,8 +48,6 @@ To begin using the toolkit, follow these steps:
    alphapd
    ```
 
-**Note:** Remember to remove the `$` or `#` signs when executing commands. They serve as indicators of shell prompt types.
-
 ## Disclaimer
 
 This project is for educational purposes only, developed as part of a school project for Novi Hogeschool.
