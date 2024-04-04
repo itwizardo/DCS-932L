@@ -18,12 +18,12 @@ To begin using the toolkit, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/itwizardo/DCS-930L.git
+   git clone https://github.com/itwizardo/DCS-932L.git
    ```
 
 2. Navigate to the directory where you downloaded the files:
    ```bash
-   cd DCS-930L
+   cd DCS-932L
    ```
 
 3. Enter the chroot environment:
