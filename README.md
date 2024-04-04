@@ -1,6 +1,6 @@
-# DCS-930L Firmware Reverse Engineering Toolkit
+# DCS-932L Firmware Reverse Engineering Toolkit
 
-Welcome to the DCS-930L Firmware. This repository contains tools and modifications to aid in the reverse engineering of the DCS-930L firmware.
+Welcome to the DCS-932L Firmware. This repository contains tools and modifications to aid in the reverse engineering of the DCS-932L firmware.
 
 ## Modifications
 
