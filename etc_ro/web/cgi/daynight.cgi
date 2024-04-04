@@ -1,5 +1,4 @@
 DayNightMode=%%DayNightMode();%%
-LightSensorControl=%%LightSensorControl();%%
 IRLedScheduleSunStart=%%IRLedScheduleSunStart();%%
 IRLedScheduleSunEnd=%%IRLedScheduleSunEnd();%%
 IRLedScheduleMonStart=%%IRLedScheduleMonStart();%%

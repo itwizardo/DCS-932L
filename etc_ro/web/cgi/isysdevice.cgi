@@ -5,7 +5,6 @@ HarwareVersion=%%HardwareVersion();%%
 ROMVersion=%%ROMVersion();%%
 Company=%%Company();%%
 CompanyURL=%%CompanyURL();%%
-
 MACAddress=%%MACAddress();%%
 IPAddress=%%CurrentIPAddress();%%
 EthernetLink=%%EthernetLink();%%
