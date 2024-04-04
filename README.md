@@ -1,19 +1,20 @@
 # DCS-930L Firmware Reverse Engineering Toolkit
 
-Welcome to the DCS-930L This repository contains tools and modifications to aid in the reverse engineering of the DCS-930L firmware.
+Welcome to the DCS-930L Firmware Reverse Engineering Toolkit! This repository contains tools and modifications to aid in the reverse engineering of the DCS-930L firmware.
 
 ## Modifications
 
 Several modifications have been made to enhance the functionality and usability of the firmware emulation environment:
 
-1. **Startup Script:** A startup script (`startup.sh`) has been added to simplify the emulation process.
-2. **Libnvram.so Adjustment:** Line 338 to 342 of `libnvram.so` has been removed and relocated to ensure proper functioning of the NVRAM emulator.
-3. **Firmadyne Integration:** The Firmadyne folder has been included to facilitate firmware emulation.
-4. **Alphapd Patch:** Alphapd has been patched using Ghidra to address the issue of being unable to obtain an IP from sysinfo.
+1. **Startup Script:** Added a startup script (`startup.sh`) to simplify emulation.
+2. **Libnvram.so Adjustment:** Removed lines 338 to 342 of `libnvram.so` to ensure proper functioning of the NVRAM emulator. The modified file has been placed in the correct folder.
+3. **Firmadyne Integration:** Added the Firmadyne folder to facilitate firmware emulation.
+4. **Alphapd Patch:** Patched Alphapd using Ghidra to resolve the error preventing IP retrieval from sysinfo.
+5. **Qemu-mipsel-static Addition:** Included qemu-mipsel-static in the folder for enhanced functionality.
 
 ## Usage
 
-To get started, follow these steps:
+To begin using the toolkit, follow these steps:
 
 1. Clone the repository:
    ```bash
@@ -47,11 +48,11 @@ To get started, follow these steps:
    alphapd
    ```
 
-**Note:** Ensure to remove the `$` or `#` signs when executing commands. They are simply indicators of shell prompt types.
+**Note:** Remember to remove the `$` or `#` signs when executing commands. They serve as indicators of shell prompt types.
 
 ## Disclaimer
 
-This project is solely intended for educational purposes as part of a school project for Novi Hogeschool. Any usage beyond educational activities is not endorsed.
+This project is for educational purposes only, developed as part of a school project for Novi Hogeschool.
 
 ## Author
 
