@@ -17,36 +17,32 @@ Several modifications have been made to enhance the functionality and usability 
 To begin using the toolkit, follow these steps:
 
 1. Clone the repository:
-   ```bash
    git clone https://github.com/itwizardo/DCS-932L.git
-   ```
 
 2. Navigate to the directory where you downloaded the files:
-   ```bash
    cd DCS-932L
-   ```
 
-3. Enter the chroot environment:
-   ```bash
-   sudo chroot . ./bin/sh
-   ```
+3. Install QEMU user emulation tools:
+   sudo apt update
+   sudo apt install qemu-user-static
 
-4. Run the startup script:
-   ```bash
+4. Copy qemu-mipsel-static into the firmware's usr/bin folder:
+   sudo cp /usr/bin/qemu-mipsel-static ./usr/bin/
+
+5. Enter the chroot environment using qemu-mipsel-static:
+   sudo chroot . /usr/bin/qemu-mipsel-static /bin/sh
+
+6. Run the startup script:
    ./startup.sh
-   ```
 
-5. Set environment variables:
-   ```bash
+7. Set environment variables (inside chroot):
    export LD_PRELOAD=/firmadyne/libnvram.so
    export HOME=.
    export RANDFILE=$HOME/.rnd
-   ```
 
-6. Start Alphapd:
-   ```bash
+8. Start Alphapd:
    alphapd
-   ```
+
 
 ## Disclaimer
 
