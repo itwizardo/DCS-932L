@@ -16,32 +16,72 @@ Several modifications have been made to enhance the functionality and usability 
 
 To begin using the toolkit, follow these steps:
 
-1. Clone the repository:
-   git clone https://github.com/itwizardo/DCS-932L.git
+## 🛠️ Emulating DCS-932L Firmware
 
-2. Navigate to the directory where you downloaded the files:
-   cd DCS-932L
+Follow these steps to emulate the D-Link DCS-932L firmware using QEMU and chroot.
 
-3. Install QEMU user emulation tools:
-   sudo apt update
-   sudo apt install qemu-user-static
+### 1. Clone the Repository
 
-4. Copy qemu-mipsel-static into the firmware's usr/bin folder:
-   sudo cp /usr/bin/qemu-mipsel-static ./usr/bin/
+```bash
+git clone https://github.com/itwizardo/DCS-932L.git
+cd DCS-932L
+```
 
-5. Enter the chroot environment using qemu-mipsel-static:
-   sudo chroot . /usr/bin/qemu-mipsel-static /bin/sh
+### 2. Install QEMU User Emulation Tools
 
-6. Run the startup script:
-   ./startup.sh
+```bash
+sudo apt update
+sudo apt install qemu-user-static
+```
 
-7. Set environment variables (inside chroot):
-   export LD_PRELOAD=/firmadyne/libnvram.so
-   export HOME=.
-   export RANDFILE=$HOME/.rnd
+### 3. (Optional) Check Your Firmware Path
 
-8. Start Alphapd:
-   alphapd
+```bash
+cd usr/bin
+pwd
+cd ../../
+```
+
+This shows your full firmware path in case you need it for debugging.
+
+### 4. Copy QEMU to the Firmware
+
+```bash
+sudo cp /usr/bin/qemu-mipsel-static ./usr/bin/
+```
+
+### 5. Enter the Chroot Environment
+
+```bash
+sudo chroot . /usr/bin/qemu-mipsel-static /bin/sh
+```
+
+### 6. Run the Startup Script
+
+```bash
+./startup.sh
+```
+
+### 7. Set Environment Variables (Inside Chroot)
+
+```bash
+export LD_PRELOAD=/firmadyne/libnvram.so
+export HOME=.
+export RANDFILE=$HOME/.rnd
+```
+
+### 8. Start Alphapd
+
+```bash
+alphapd
+```
+
+### ⚠️ Notes
+
+- This firmware is **MIPS Little Endian**, so you **must** use `qemu-mipsel-static`.
+- Using `qemu-mips-static` will result in `Invalid ELF image` errors.
+- Ensure that `/lib/ld
+
 
 
 ## Disclaimer
