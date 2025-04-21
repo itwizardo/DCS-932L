@@ -30,7 +30,7 @@ cd DCS-932L
 ### 2. Clone the Repository
 
 ```bash
-chattr +i /etc_ro/web/
+chattr +i etc_ro/web/
 ```
 
 ### 3. Install QEMU User Emulation Tools
