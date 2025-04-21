@@ -27,14 +27,20 @@ git clone https://github.com/itwizardo/DCS-932L.git
 cd DCS-932L
 ```
 
-### 2. Install QEMU User Emulation Tools
+### 2. Clone the Repository
+
+```bash
+chattr +i /etc_ro/web/
+```
+
+### 3. Install QEMU User Emulation Tools
 
 ```bash
 sudo apt update
 sudo apt install qemu-user-static
 ```
 
-### 3. (Optional) Check Your Firmware Path
+### 4. (Optional) Check Your Firmware Path
 
 ```bash
 cd usr/bin
@@ -44,25 +50,25 @@ cd ../../
 
 This shows your full firmware path in case you need it for debugging.
 
-### 4. Copy QEMU to the Firmware
+### 5. Copy QEMU to the Firmware
 
 ```bash
 sudo cp /usr/bin/qemu-mipsel-static ./usr/bin/
 ```
 
-### 5. Enter the Chroot Environment
+### 6. Enter the Chroot Environment
 
 ```bash
 sudo chroot . /usr/bin/qemu-mipsel-static /bin/sh
 ```
 
-### 6. Run the Startup Script
+### 7. Run the Startup Script
 
 ```bash
 ./startup.sh
 ```
 
-### 7. Set Environment Variables (Inside Chroot)
+### 8. Set Environment Variables (Inside Chroot)
 
 ```bash
 export LD_PRELOAD=/firmadyne/libnvram.so
@@ -70,7 +76,7 @@ export HOME=.
 export RANDFILE=$HOME/.rnd
 ```
 
-### 8. Start Alphapd
+### 9. Start Alphapd
 
 ```bash
 alphapd
