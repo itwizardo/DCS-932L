@@ -1,4 +1,4 @@
-# Make Emulating Easy Again
+# Make Emulating Great Again
 ![ChatGPT Image Apr 22, 2025, 12_56_50 PM](https://github.com/user-attachments/assets/cc735a2a-b40d-4340-9667-2907ca2142f5)
 
 Welcome! This repository provides tools and an environment to emulate the D-Link DCS-932L firmware and demonstrate the **CVE-2024-37606** vulnerability. It includes pre-patched binaries and necessary libraries, simplifying the emulation setup so you don't need to perform manual patching with tools like Ghidra.
@@ -50,11 +50,23 @@ Copy the QEMU static binary into the firmware's filesystem:
 sudo cp /usr/bin/qemu-mipsel-static ./usr/bin/
 ```
 
-(Optional) Set immutable attribute on web directory to prevent accidental changes:
+Set the immutable attribute on the web directory. This prevents modification of critical web server files needed for the emulation and exploit to function correctly:
 
-```bash
-sudo chattr +i etc_ro/web/
-```
+*   **On Linux:**
+    ```bash
+    sudo chattr +i etc_ro/web/
+    ```
+*   **On Windows (PowerShell - Sets Read-Only attribute):**
+    ```powershell
+    Set-ItemProperty -Path ./etc_ro/web -Name IsReadOnly -Value $true
+    # Note: This sets the directory as Read-Only, preventing accidental changes.
+    # To make contents read-only too, add -Recurse to Get-ChildItem:
+    # Get-ChildItem -Path ./etc_ro/web -Recurse | Set-ItemProperty -Name IsReadOnly -Value $true
+    ```
+*   **On macOS:**
+    ```bash
+    sudo chflags schg etc_ro/web/
+    ```
 
 ### 5. Start the Emulation Environment
 
@@ -76,7 +88,7 @@ export HOME=.
 export RANDFILE=$HOME/.rnd
 
 # Start the vulnerable web server (binds to 0.0.0.0, may take 1-2 mins to fully initialize)
-alphapd 
+alphapd &
 ```
 
 Leave this terminal running. The emulated device's services will be accessible via the host machine using the IP address configured by `startup.sh` (often `192.168.0.1`).
@@ -85,10 +97,10 @@ Leave this terminal running. The emulated device's services will be accessible v
 
 Open a **new terminal window** on your host machine (outside the chroot environment).
 
-Navigate back to the project directory if needed:
+Open in new terminal:
 
 ```bash
-cd /path/to/DCS932L-CVE # Adjust path if necessary
+cd /path/to/DCS932L # Adjust path if necessary
 ```
 
 (Optional) Install required Python packages if the script needs them (e.g., `requests`):
@@ -129,4 +141,5 @@ This was developed as part of a school project for Novi Hogeschool.
 Georgio T. - [itwizardo](https://github.com/itwizardo)
 
 Feel free to contribute to this project and improve the tools for firmware reverse engineering and security analysis!
+
 
