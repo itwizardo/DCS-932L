@@ -1,4 +1,4 @@
-# Make Emulating Great Again
+# Make Emulating Easy Again
 ![ChatGPT Image Apr 22, 2025, 12_56_50 PM](https://github.com/user-attachments/assets/cc735a2a-b40d-4340-9667-2907ca2142f5)
 
 Welcome! This repository provides tools and an environment to emulate the D-Link DCS-932L firmware and demonstrate the **CVE-2024-37606** vulnerability. It includes pre-patched binaries and necessary libraries, simplifying the emulation setup so you don't need to perform manual patching with tools like Ghidra.
