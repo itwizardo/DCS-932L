@@ -6,6 +6,7 @@ Welcome! This repository provides tools and an environment to emulate the D-Link
 ## CVE-2024-37606
 
 This project includes a proof-of-concept exploit (`CVE-2024-37606-DCS932L.py`) for CVE-2024-37606. This vulnerability involves a buffer overflow in the alphapd service. Please use this responsibly and for educational purposes only.
+Click on the photo to see the video
 [![Watch the demo](thumb.png)](https://vimeo.com/1077361116)
 
 ## Modifications for Emulation
