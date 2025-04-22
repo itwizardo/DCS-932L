@@ -76,7 +76,7 @@ export HOME=.
 export RANDFILE=$HOME/.rnd
 
 # Start the vulnerable web server (binds to 0.0.0.0, may take 1-2 mins to fully initialize)
-alphapd &
+alphapd 
 ```
 
 Leave this terminal running. The emulated device's services will be accessible via the host machine using the IP address configured by `startup.sh` (often `192.168.0.1`).
