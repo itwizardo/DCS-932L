@@ -37,10 +37,23 @@ cd DCS932L-CVE
 
 ### 3. Install QEMU User Emulation Tools
 
-```bash
-sudo apt update
-sudo apt install qemu-user-static
-```
+*   **On Linux (Debian/Ubuntu):**
+    ```bash
+    sudo apt update
+    sudo apt install qemu-user-static
+    ```
+*   **On macOS (using Homebrew):**
+    ```bash
+    brew install qemu
+    # QEMU installation via Homebrew includes user-mode static binaries.
+    ```
+*   **On Windows (using Chocolatey or Manual Install):**
+    *   Using Chocolatey (requires Chocolatey installed):
+        ```powershell
+        choco install qemu
+        ```
+    *   Manual Install: Download the QEMU installer from the [official QEMU website](https://www.qemu.org/download/#windows) and ensure the installation directory is added to your system's PATH.
+
 
 ### 4. Prepare Firmware Filesystem
 
